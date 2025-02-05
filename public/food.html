@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selección de comida</title>
+    <link rel="icon" type="image/x-icon" href="strawberry.ico">
+    <link rel="stylesheet" href="css/food.css" />
+  </head>
+  <body>
+    <form
+  id="foodForm"
+  method="POST"
+  onsubmit="submitFoodForm(event)"
+>
+      <div id="foodquestion">
+        <b>¿Qué te gustaría comer?</b>
+      </div>
+
+      <div class="food-selection">
+        <div class="food-item">
+          <img src="food/pollo.jpeg" alt="Pollo" />
+          <label
+            ><input type="radio" name="food" value="pollo" required />
+            Pollo Frito</label
+          >
+        </div>
+        <div class="food-item">
+          <img src="food/dog.jpeg" alt="dog" />
+          <label
+            ><input type="radio" name="food" value="hotdog" /> hotdog</label
+          >
+        </div>
+        <div class="food-item">
+          <img src="food/burrito.jpeg" alt="burrito" />
+          <label
+            ><input type="radio" name="food" value="burrito" /> burrito</label
+          >
+        </div>
+        <div class="food-item">
+          <img src="food/lasagna.jpeg" alt="pasta" />
+          <label><input type="radio" name="food" value="pasta" /> pasta</label>
+        </div>
+        <div class="food-item">
+          <img src="food/pizza.jpeg" alt="pizza" />
+          <label><input type="radio" name="food" value="pizza" /> pizza</label>
+        </div>
+        <div class="food-item">
+          <img src="food/tacos.jpeg" alt="tacos" />
+          <label><input type="radio" name="food" value="tacos" /> tacos</label>
+        </div>
+        <div class="food-item">
+          <img src="food/burgers.jpeg" alt="burguer" />
+          <label
+            ><input type="radio" name="food" value="burguer" />
+            Hamburguesa</label
+          >
+        </div>
+        <div class="food-item">
+          <img src="food/sushi.jpeg" alt="sushi" />
+          <label><input type="radio" name="food" value="sushi" /> sushi</label>
+        </div>
+      </div>
+      <!-- Botón sin redirigir directamente -->
+      <button class="button" type="submit">Continue UWU</button>
+</form>
+<script>
+  const API_URL = 'http://localhost:3000/api/data/food';
+  function submitFoodForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = Object.fromEntries(new FormData(form));
+
+    fetch(form.action, {
+      method: form.method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Error en la respuesta del servidor");
+        return response.json();
+      })
+      .then(() => {
+        window.location.href = "dessert.html";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Ocurrió un error. Inténtalo nuevamente.");
+      });
+  }
+</script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Después</title>
+    <link rel="icon" type="image/x-icon" href="strawberry.ico">
+    <link rel="stylesheet" href="css/activities.css" />
+  </head>
+  <body>
+    <form
+  id="activityForm"
+  method="POST"
+  onsubmit="submitActivityForm(event)"
+>
+      <div id="activityquestion"><b>¿Qué hacemos después, chiki?</b></div>
+      <div class="activities-selection">
+        <div class="activity-item">
+          <img src="activities/metro.jpeg" alt="metro" />
+          <label><input type="radio" name="activities" value="metro" /> Metro</label>
+        </div>
+        <div class="activity-item">
+          <img src="activities/sadcat.gif" alt="casa" />
+          <label><input type="radio" name="activities" value="casa" /> Casa pipipi</label>
+        </div>
+      </div>
+      <!-- Botón actualizado -->
+      <button class="button" type="submit">Final</button>
+</form>
+<script>
+  const API_URL = 'http://localhost:3000/api/data/activity';
+  function submitActivityForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = Object.fromEntries(new FormData(form));
+
+    fetch(form.action, {
+      method: form.method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Error en la respuesta del servidor");
+        return response.json();
+      })
+      .then(() => {
+        window.location.href = "lastpage.html";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Ocurrió un error. Inténtalo nuevamente.");
+      });
+  }
+</script>
+  </body>
+</html>

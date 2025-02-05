@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fecha</title>
+    <link rel="icon" type="image/x-icon" href="strawberry.ico">
+    <link rel="stylesheet" href="css/date.css" />
+  </head>
+  <body>
+    <h1 title="choose a date">Estas libre en ...</h1>
+    <form
+      class="form-group"
+      method="POST"
+      onsubmit="submitDateForm(event)"
+    >
+      <label>Que dia: (selecciona una fecha tilin)</label>
+      <div>
+        <input type="date" name="date" required />
+        <button class="button" type="submit">Enviar</button>
+      </div>
+    </form>
+    <script>
+      const API_URL = 'http://localhost:3000/api/data/date';
+
+      function submitDateForm(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = Object.fromEntries(new FormData(form));
+
+        fetch(`${API_URL}/date`, {
+          method: 'POST',
+          headers: { 
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error("Error en la respuesta del servidor");
+            return response.json();
+          })
+          .then(() => {
+            window.location.href = "food.html";
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Ocurrió un error. Inténtalo nuevamente.");
+          });
+      }
+    </script>
+  </body>
+</html>
