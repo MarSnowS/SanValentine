@@ -11,7 +11,10 @@
   const app = express();
 
   // Middleware
-  app.use(cors({ origin: 'https://MarSnowS.github.io', credentials: true }));
+  app.use(cors({ 
+  origin: ['https://marsnows.github.io', 'http://localhost:3000'],
+  credentials: true 
+}));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
