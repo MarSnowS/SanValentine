@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Se mi San Valentin <3</title>
+    <link rel="icon" type="image/x-icon" href="strawberry.ico">
+    <link rel="stylesheet" href="public/css/valentine.css" />
+    
+  </head>
+  <body>
+    <div id="valentineQuestion"><b>Quieres ser mi San Valentin chiki?</b></div>
+    <button class="answerButton" onclick="location.href='public/thankyou.html'">
+      SIII
+    </button>
+    <button class="answerButton" id="noButton">NO, CHINGATUMADRE(╥﹏╥)o</button>
+    <br />
+    <img src="cat.gif" alt="cat asking question" class="responsive" />
+
+    <script>
+      document
+        .getElementById("noButton")
+        .addEventListener("click", function () {
+          var yesButton = document.querySelector(
+            'button[onclick*="thankyou.html"]'
+          );
+          var currentFontSize = parseInt(
+            window.getComputedStyle(yesButton).fontSize
+          );
+          yesButton.style.fontSize = currentFontSize + 10 + "px"; // Increase font size by 5px
+        });
+    </script>
+  </body>
+</html>
