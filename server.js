@@ -12,7 +12,7 @@
 
   // Middleware
   app.use(cors({ 
-  origin: ['https://marsnows.github.io', 'http://localhost:3000'],
+  origin: ['https://MarSnowS.github.io', 'http://localhost:3000'],
   credentials: true 
 }));
   app.use(bodyParser.json());
